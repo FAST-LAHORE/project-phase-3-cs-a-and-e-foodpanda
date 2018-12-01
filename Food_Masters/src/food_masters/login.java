@@ -5,10 +5,15 @@
  */
 package food_masters;
 
-import java.beans.Statement;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.PasswordField;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
@@ -18,13 +23,15 @@ import javax.swing.JOptionPane;
  */
 public class login extends javax.swing.JFrame {
 Connection con= null;
-    Statement st=null;
+// PreparedStatement ps=null;
+  Statement ps=null;
     ResultSet rs=null;
     /**
      * Creates new form login
      */
     public login() {
         initComponents();
+   
         
     }
 
@@ -49,7 +56,7 @@ Connection con= null;
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,9 +111,9 @@ Connection con= null;
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addGap(57, 57, 57)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                            .addComponent(jPasswordField1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -131,13 +138,13 @@ Connection con= null;
                             .addComponent(jLabel3)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jLabel7))
@@ -189,8 +196,15 @@ Connection con= null;
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+       
          String n=jTextField1.getText();
-         String k=jTextField2.getText();
+         String k = new String(jPasswordField1.getPassword());
+         
           if(n.isEmpty())
             {
                  JOptionPane.showMessageDialog(rootPane, "Name cannot be empty", "Invalid name", HEIGHT);
@@ -201,27 +215,37 @@ Connection con= null;
             }
           if(n.isEmpty()==false && k.isEmpty()==false)
           {
-              
+                        String query="Select * from saqib.users where name='saqib' and password='saqib'";
+                         try {
+                            con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
+                        } catch (SQLException ex) {
+                            //JOptionPane.showMessageDialog(rootPane, "failed", "bye", HEIGHT);
+                        }
+                  try
+                  {
+                    
+//                      ps=con.Statement(query);
+//                      ps.setString(1, jTextField1.getText());
+//                      ps.setString(2,k);
+                      ps=con.createStatement();
+                      
+                      rs=ps.executeQuery(query);
+                      JOptionPane.showMessageDialog(rootPane, "congoz", "Login Successful", HEIGHT);
+//                      if(rs.next())
+//                      {
+//                      JOptionPane.showMessageDialog(rootPane, "congoz", "Login Successful", HEIGHT);
+//                      }     
+//                      else{
+//                          JOptionPane.showMessageDialog(rootPane, "Invalid Username or password", "Login failed", HEIGHT);
+//                      }
+                  }
+                  catch(SQLException e)
+                  {
+                              //JOptionPane.showMessageDialog(rootPane, "failed", "bye", HEIGHT);
+                      e.printStackTrace();
+                  }
           }
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String query="Delete from saqib.users where ";
-        try
-        {
-        con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
-        st=con.createStatement();
-        st.executeUpdate(query);
-        JOptionPane.showMessageDialog(rootPane, "All players and their scores have been deleted", "Records Deleted", HEIGHT);
-//                    while(rs.next())
-//                    {
-//
-//                    }
-         }catch(SQLException e)
-        {
-                   //e.printStackTrace();
-        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -271,7 +295,7 @@ Connection con= null;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
