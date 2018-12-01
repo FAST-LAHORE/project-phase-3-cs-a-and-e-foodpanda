@@ -5,17 +5,27 @@
  */
 package food_masters;
 
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author S.Saqib
  */
 public class login extends javax.swing.JFrame {
-
+Connection con= null;
+    Statement st=null;
+    ResultSet rs=null;
     /**
      * Creates new form login
      */
     public login() {
         initComponents();
+        
     }
 
     /**
@@ -58,11 +68,22 @@ public class login extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(51, 255, 51));
         jButton2.setText("Sign in");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Password:");
 
         jLabel5.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         jLabel5.setText("Login Panel");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Username: ");
 
@@ -165,6 +186,43 @@ public class login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+         String n=jTextField1.getText();
+         String k=jTextField2.getText();
+          if(n.isEmpty())
+            {
+                 JOptionPane.showMessageDialog(rootPane, "Name cannot be empty", "Invalid name", HEIGHT);
+            }
+          if(k.isEmpty())
+            {
+                 JOptionPane.showMessageDialog(rootPane, "Please enter a valid password", "Invalid password", HEIGHT);
+            }
+          if(n.isEmpty()==false && k.isEmpty()==false)
+          {
+              
+          }
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String query="Delete from saqib.users where ";
+        try
+        {
+        con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
+        st=con.createStatement();
+        st.executeUpdate(query);
+        JOptionPane.showMessageDialog(rootPane, "All players and their scores have been deleted", "Records Deleted", HEIGHT);
+//                    while(rs.next())
+//                    {
+//
+//                    }
+         }catch(SQLException e)
+        {
+                   //e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
