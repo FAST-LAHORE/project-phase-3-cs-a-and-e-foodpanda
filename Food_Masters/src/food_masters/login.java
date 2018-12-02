@@ -203,8 +203,8 @@ Connection con= null;
         // TODO add your handling code here:
        
          String n=jTextField1.getText();
-         String k = new String(jPasswordField1.getPassword());
-         
+          String k = new String(jPasswordField1.getPassword());
+        
           if(n.isEmpty())
             {
                  JOptionPane.showMessageDialog(rootPane, "Name cannot be empty", "Invalid name", HEIGHT);
@@ -213,37 +213,46 @@ Connection con= null;
             {
                  JOptionPane.showMessageDialog(rootPane, "Please enter a valid password", "Invalid password", HEIGHT);
             }
-          if(n.isEmpty()==false && k.isEmpty()==false)
+          if(n.isEmpty()==false && k.isEmpty()==false )
           {
-                        String query="Select * from saqib.users where name='saqib' and password='saqib'";
-                         try {
-                            con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
-                        } catch (SQLException ex) {
-                            //JOptionPane.showMessageDialog(rootPane, "failed", "bye", HEIGHT);
-                        }
-                  try
-                  {
-                    
-//                      ps=con.Statement(query);
-//                      ps.setString(1, jTextField1.getText());
-//                      ps.setString(2,k);
-                      ps=con.createStatement();
-                      
-                      rs=ps.executeQuery(query);
-                      JOptionPane.showMessageDialog(rootPane, "congoz", "Login Successful", HEIGHT);
-//                      if(rs.next())
+              
+//                        String query="Select role_name from saqib.roles where role_id=select role_id from saqib.users where name='"+n+"' and password2='"+k+"'";
+//                         try {
+//                            con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
+//                        } catch (SQLException ex) {
+//                            JOptionPane.showMessageDialog(rootPane, "failed", "bye", HEIGHT);
+//                        }
+//                         
+//                  try
+//                  {
+//                    
+////                      ps=con.Statement(query);
+////                      ps.setString(1, jTextField1.getText());
+////                      ps.setString(2,k);
+//                      ps=con.createStatement();
+//                      
+//                      rs=ps.executeQuery(query);
+//                      while(rs.next())
 //                      {
-//                      JOptionPane.showMessageDialog(rootPane, "congoz", "Login Successful", HEIGHT);
-//                      }     
-//                      else{
-//                          JOptionPane.showMessageDialog(rootPane, "Invalid Username or password", "Login failed", HEIGHT);
+//                      int t=rs.getInt("role_id");
+//                      System.out.println("\trole: " + t); 
+//                      JOptionPane.showMessageDialog(rootPane, "congoz", t+"", HEIGHT);
 //                      }
-                  }
-                  catch(SQLException e)
-                  {
-                              //JOptionPane.showMessageDialog(rootPane, "failed", "bye", HEIGHT);
-                      e.printStackTrace();
-                  }
+//// System.out.println(t);        
+//                      
+////                      if(rs.next())
+////                      {
+////                      JOptionPane.showMessageDialog(rootPane, "congoz", "Login Successful", HEIGHT);
+////                      }     
+////                      else{
+////                          JOptionPane.showMessageDialog(rootPane, "Invalid Username or password", "Login failed", HEIGHT);
+////                      }
+//                  }
+//                  catch(SQLException e)
+//                  {
+//                              //JOptionPane.showMessageDialog(rootPane, "failed", "bye", HEIGHT);
+//                      e.printStackTrace();
+//                  }
           }
         
     }//GEN-LAST:event_jButton2ActionPerformed
