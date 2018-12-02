@@ -6,6 +6,11 @@
 package food_masters;
 
 import static java.awt.image.ImageObserver.HEIGHT;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,7 +18,10 @@ import javax.swing.JOptionPane;
  * @author S.Saqib
  */
 public class sign_up extends javax.swing.JFrame {
-
+Connection con= null;
+// PreparedStatement ps=null;
+  Statement ps=null;
+    ResultSet rs=null;
     /**
      * Creates new form sign_up
      */
@@ -159,7 +167,7 @@ public class sign_up extends javax.swing.JFrame {
          String st3=jTextField3.getText();
          String pw1 = new String(jPasswordField1.getPassword());
          String pw2 = new String(jPasswordField2.getPassword());
-        
+        Integer default_role=5;  //customer
           if(st1.isEmpty())
             {
                  JOptionPane.showMessageDialog(rootPane, "Name cannot be empty", "Invalid name", HEIGHT);
@@ -188,12 +196,31 @@ public class sign_up extends javax.swing.JFrame {
           {
               JOptionPane.showMessageDialog(rootPane, "ok", "bye", HEIGHT);
           }
-          
+                      try {
+                           con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
+                        } catch (SQLException ex) {
+                            JOptionPane.showMessageDialog(rootPane, "DB connection failed", "Connection failed ", HEIGHT);
+                        }
+          try{            
+         ps = con.createStatement();
+         ps.executeUpdate("Insert into saqib.users(name,email,password2,role_id,mobile) values ("+quotate(jTextField1.getText())+","+quotate(jTextField2.getText())+","+quotate(pw1)+","+default_role+","+quotate(jTextField3.getText())+")");
+         JOptionPane.showMessageDialog(rootPane, "inserted", "done ", HEIGHT);      
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    catch(SQLException e){
+        e.printStackTrace();
+    }
+    }
+    
+          
     /**
      * @param args the command line arguments
      */
+    
+     public String quotate(String content){
+    
+        return "'"+content+"'";
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
