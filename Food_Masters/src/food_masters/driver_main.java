@@ -9,14 +9,6 @@ package food_masters;
  *
  * @author S.Saqib
  */
-public class Food_Masters {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-         Admin object = Admin.getInstance();
-    }
+public class driver_main {
     
 }

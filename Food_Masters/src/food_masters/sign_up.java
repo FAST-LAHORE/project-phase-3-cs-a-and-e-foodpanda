@@ -194,7 +194,7 @@ Connection con= null;
             }
           if(st1.isEmpty()==false && st2.isEmpty()==false && st3.isEmpty()==false && pw1.isEmpty()==false && pw2.isEmpty()==false && pw2.equals(pw1)==true)
           {
-              JOptionPane.showMessageDialog(rootPane, "ok", "bye", HEIGHT);
+             // JOptionPane.showMessageDialog(rootPane, "ok", "bye", HEIGHT);
           }
                       try {
                            con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
