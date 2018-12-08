@@ -179,12 +179,6 @@ public class StaffList extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1_staff);
-        if (jTable1_staff.getColumnModel().getColumnCount() > 0) {
-            jTable1_staff.getColumnModel().getColumn(0).setHeaderValue("First Name");
-            jTable1_staff.getColumnModel().getColumn(1).setHeaderValue("Last Name");
-            jTable1_staff.getColumnModel().getColumn(2).setHeaderValue("Desgination");
-            jTable1_staff.getColumnModel().getColumn(3).setHeaderValue("Mobile Number");
-        }
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel10.setText("Monthly Salarly:");
