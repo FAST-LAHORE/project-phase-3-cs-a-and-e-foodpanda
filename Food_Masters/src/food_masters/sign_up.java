@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
@@ -196,23 +197,44 @@ Connection con= null;
                  JOptionPane.showMessageDialog(rootPane, "Passwords must be same", "Passwords do not match", HEIGHT);
             }
           if(st1.isEmpty()==false && st2.isEmpty()==false && st3.isEmpty()==false && pw1.isEmpty()==false && pw2.isEmpty()==false && pw2.equals(pw1)==true)
-          {
-              JOptionPane.showMessageDialog(rootPane, "ok", "bye", HEIGHT);
-              c.set_user(st1,st2, st3, pw1);
-          }
-                      try {
+          { 
+              test te=new test();
+              boolean flag =te.isValid(st2);
+              boolean flag1 =te.isValid_mobile(st3);
+             if(flag==true&&flag1==true)
+             {
+                JOptionPane.showMessageDialog(rootPane, "ok", "bye", HEIGHT);
+                c.set_user(st1,st2, st3, pw1);
+             
+                      try{
                            con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
-                        } catch (SQLException ex) {
+                        } 
+                      catch (SQLException ex) {
                             JOptionPane.showMessageDialog(rootPane, "DB connection failed", "Connection failed ", HEIGHT);
                         }
           try{            
          ps = con.createStatement();
          ps.executeUpdate("Insert into saqib.users(name,email,password,mobile,role_id,validation) values ("+quotate(c.name)+","+quotate(c.email)+","+quotate(c.password)+","+quotate(c.mobile_no)+","+c.rol_id+","+0+")");
          JOptionPane.showMessageDialog(rootPane, "inserted", "done ", HEIGHT);      
-    } catch (SQLException ex) {
-        Logger.getLogger(sign_up.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+          catch (SQLException ex) 
+          {
+            Logger.getLogger(sign_up.class.getName()).log(Level.SEVERE, null, ex);
     }//GEN-LAST:event_jButton3ActionPerformed
-
+             }
+          else
+           {
+               if (flag==false)
+               {
+                  JOptionPane.showMessageDialog(rootPane, "email not valid", "bye", HEIGHT);
+               }
+               if(flag1==false)
+               {
+                   JOptionPane.showMessageDialog(rootPane, "mobile number not valid", "bye", HEIGHT);
+               }
+             
+            }
+          }
     }
     
           
