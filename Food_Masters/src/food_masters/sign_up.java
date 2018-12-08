@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -162,12 +164,12 @@ Connection con= null;
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String st1=jTextField1.getText();
+         String st1=jTextField1.getText();
          String st2=jTextField2.getText();
          String st3=jTextField3.getText();
          String pw1 = new String(jPasswordField1.getPassword());
          String pw2 = new String(jPasswordField2.getPassword());
-        Integer default_role=5;  //customer
+         Customer c=new Customer();
           if(st1.isEmpty())
             {
                  JOptionPane.showMessageDialog(rootPane, "Name cannot be empty", "Invalid name", HEIGHT);
@@ -194,7 +196,8 @@ Connection con= null;
             }
           if(st1.isEmpty()==false && st2.isEmpty()==false && st3.isEmpty()==false && pw1.isEmpty()==false && pw2.isEmpty()==false && pw2.equals(pw1)==true)
           {
-             // JOptionPane.showMessageDialog(rootPane, "ok", "bye", HEIGHT);
+              JOptionPane.showMessageDialog(rootPane, "ok", "bye", HEIGHT);
+              c.set_user(st1,st2, st3, pw1);
           }
                       try {
                            con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
@@ -203,12 +206,12 @@ Connection con= null;
                         }
           try{            
          ps = con.createStatement();
-         ps.executeUpdate("Insert into saqib.users(name,email,password2,role_id,mobile) values ("+quotate(jTextField1.getText())+","+quotate(jTextField2.getText())+","+quotate(pw1)+","+default_role+","+quotate(jTextField3.getText())+")");
+         ps.executeUpdate("Insert into saqib.users(name,email,password2,role_id,mobile) values ("+quotate(c.name)+","+quotate(c.email)+","+quotate(c.password)+","+c.rol_id+","+quotate(c.password)+")");
          JOptionPane.showMessageDialog(rootPane, "inserted", "done ", HEIGHT);      
+    } catch (SQLException ex) {
+        Logger.getLogger(sign_up.class.getName()).log(Level.SEVERE, null, ex);
     }//GEN-LAST:event_jButton3ActionPerformed
-    catch(SQLException e){
-        e.printStackTrace();
-    }
+
     }
     
           
