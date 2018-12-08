@@ -25,7 +25,7 @@ public class Customer extends User{
        set_user(n,e,p,m);
        rol_id=5;
     }
-    public void set_user(String n,String e,String p,String m)
+    public void set_user(String n,String e,String m,String p)
     {
        name=n;
        email=e;

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -176,23 +177,23 @@ Connection con= null;
             }
           if(st2.isEmpty())
             {
-                 JOptionPane.showMessageDialog(rootPane, "Please enter a valid password", "Invalid password", HEIGHT);
+                 JOptionPane.showMessageDialog(rootPane, "Please enter a valid email", "Invalid email", HEIGHT);
             }
            if(st3.isEmpty())
             {
-                 JOptionPane.showMessageDialog(rootPane, "Name cannot be empty", "Invalid name", HEIGHT);
+                 JOptionPane.showMessageDialog(rootPane, "enter a phone number", "Invalid phone number", HEIGHT);
             }
             if(pw1.isEmpty())
             {
-                 JOptionPane.showMessageDialog(rootPane, "Name cannot be empty", "Invalid name", HEIGHT);
+                 JOptionPane.showMessageDialog(rootPane, "Password cannot be empty", "Invalid name", HEIGHT);
             }
              if(pw2.isEmpty())
             {
-                 JOptionPane.showMessageDialog(rootPane, "Name cannot be empty", "Invalid name", HEIGHT);
+                 JOptionPane.showMessageDialog(rootPane, "confirm password cannot be empty", "Invalid name", HEIGHT);
             }
               if(pw1!=null && pw2.equals(pw1)==false)
             {
-                 JOptionPane.showMessageDialog(rootPane, "Passwords should be same", "Passwords do not match", HEIGHT);
+                 JOptionPane.showMessageDialog(rootPane, "Passwords must be same", "Passwords do not match", HEIGHT);
             }
           if(st1.isEmpty()==false && st2.isEmpty()==false && st3.isEmpty()==false && pw1.isEmpty()==false && pw2.isEmpty()==false && pw2.equals(pw1)==true)
           {
@@ -206,7 +207,7 @@ Connection con= null;
                         }
           try{            
          ps = con.createStatement();
-         ps.executeUpdate("Insert into saqib.users(name,email,password2,role_id,mobile) values ("+quotate(c.name)+","+quotate(c.email)+","+quotate(c.password)+","+c.rol_id+","+quotate(c.password)+")");
+         ps.executeUpdate("Insert into saqib.users(name,email,password,mobile,role_id,validation) values ("+quotate(c.name)+","+quotate(c.email)+","+quotate(c.password)+","+quotate(c.mobile_no)+","+c.rol_id+","+0+")");
          JOptionPane.showMessageDialog(rootPane, "inserted", "done ", HEIGHT);      
     } catch (SQLException ex) {
         Logger.getLogger(sign_up.class.getName()).log(Level.SEVERE, null, ex);
