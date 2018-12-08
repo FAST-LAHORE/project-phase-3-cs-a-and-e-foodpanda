@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package food_masters;
-
+import java.util.Date;
 
 /**
  *
@@ -21,10 +21,10 @@ public class Staff {
     private String mobileNumber;
     private int staffAge;
     private double staffSalarly;
-    private String dateofjoining;
+    private Date dateofjoining;
     
     public Staff(int Id,String fName,String lName,String sDesgination,String CNICnumber,String sAddress,String mobilenum,int sAge,
-            double sSalarly,String DateofJoining)
+            double sSalarly,Date DateofJoining)
     {
         staffId=Id;
         firstName=fName;
@@ -39,7 +39,7 @@ public class Staff {
         
     }
     
-    public String getDateofJoining()
+    public Date getDateofJoining()
     {
         return dateofjoining;
     }
