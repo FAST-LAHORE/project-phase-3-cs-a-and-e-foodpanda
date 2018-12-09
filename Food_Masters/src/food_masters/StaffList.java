@@ -5,6 +5,16 @@
  */
 package food_masters;
 
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author M-IMRAN
@@ -17,8 +27,73 @@ public class StaffList extends javax.swing.JFrame {
     public StaffList() {
         
         initComponents();
+        showStaff_In_JTable();
+        
     }
 
+    public Connection getConnection()
+    {
+        Connection con;
+        try
+        {
+            con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
+            return con;
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(rootPane, "DB connection failed", "Connection failed ", HEIGHT);
+            return null;
+        }
+        
+    }
+    
+    public ArrayList<Staff> staffList()
+    {
+        ArrayList<Staff> staffList=new ArrayList<Staff>();
+        Connection connection=getConnection();
+        String query="Select * FROM 'TBLSTAFF'";
+        Statement st;
+        ResultSet rs;
+        try{
+            st=connection.createStatement();
+            rs=st.executeQuery(query);
+            Staff staff;
+            while(rs.next())
+            {
+                staff=new Staff(rs.getInt("staffId"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("Desgination"),
+                        rs.getString("CNICNumber"),rs.getString("staffAddress"),rs.getString("mobileNumber"),rs.getInt("staffAge"),rs.getDouble("staffSalarly"),
+                        rs.getDate("staffJoiningDate"));
+                staffList.add(staff);
+                
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(rootPane, "DB connection failed", "Connection failed ", HEIGHT);
+        }
+        return staffList;
+    }
+    
+    //Display Data in JTABLE
+    public void showStaff_In_JTable()
+    {
+        ArrayList<Staff> list=staffList();
+        DefaultTableModel model=(DefaultTableModel)jTable1_staff.getModel();
+        Object[] row=new Object[4];
+        for(int i=0;i<list.size();i++)
+        {
+            row[0]=list.get(i).getFirstName();
+            row[1]=list.get(i).getLastName();
+            row[2]=list.get(i).getStaffDesgination();
+            row[3]=list.get(i).getMobileNumber();
+            model.addRow(row);
+        }
+        
+     
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,7 +121,7 @@ public class StaffList extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable1_staff = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         jTextField8_MonthlySalarly = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -95,7 +170,7 @@ public class StaffList extends javax.swing.JFrame {
 
         jTextField7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1_staff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -103,13 +178,7 @@ public class StaffList extends javax.swing.JFrame {
                 "First Name", "Last Name", "Desgination", "Mobile Number"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("First Name");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Last Name");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Desgination");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Mobile Number");
-        }
+        jScrollPane1.setViewportView(jTable1_staff);
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel10.setText("Monthly Salarly:");
@@ -309,7 +378,7 @@ public class StaffList extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable1_staff;
     private javax.swing.JTextField jTextField1_FirstName;
     private javax.swing.JTextField jTextField2_LastName;
     private javax.swing.JTextField jTextField3_Desgination;
