@@ -22,5 +22,5 @@ public abstract class User {
        mobile_no=null;
     }
      public abstract void set_user(String n,String e,String p,String m);
-     public abstract boolean updatedatabase();
+     public abstract void updatedatabase();
 }
