@@ -22,10 +22,10 @@ import javax.swing.JOptionPane;
  * @author mehbo
  */
 public class Restaurent extends javax.swing.JDialog {
-Connection con= null;
+Connection con1= null;
 // PreparedStatement ps=null;
-  Statement ps=null;
-    ResultSet rs=null;
+  Statement ps1=null;
+    ResultSet rs1=null;
     /**
      * Creates new form Restaurent
      */
@@ -201,10 +201,16 @@ Connection con= null;
             if(flag==true&&flag1==true)
             {
                 JOptionPane.showMessageDialog(rootPane, "ok", "bye", HEIGHT);
-                r.set_user(st1,st2, st3, pw1);
+                r.set_restuarent(st1,st2, st3, pw1);
                 try{
-                    ps = con.createStatement();
-                    ps.executeUpdate("Insert into saqib.restaurent(name,email,password,mobile,validation) values ("+quotate(r.name)+","+quotate(r.email)+","+quotate(r.password)+","+quotate(r.mobile_no)+","+r.validation+")");
+                           con1=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
+                        } 
+                      catch (SQLException ex) {
+                            JOptionPane.showMessageDialog(rootPane, "DB connection failed", "Connection failed ", HEIGHT);
+                        }
+                try{
+                    ps1 = con1.createStatement();
+                    ps1.executeUpdate("Insert into saqib.restaurent(restaurent_name,email,password,mobile,validation) values ("+quotate(r.name)+","+quotate(r.email)+","+quotate(r.password)+","+quotate(r.mobile_no)+","+r.validation+")");
                     JOptionPane.showMessageDialog(rootPane, "inserted", "done ", HEIGHT);
                 }
                 catch (SQLException ex)

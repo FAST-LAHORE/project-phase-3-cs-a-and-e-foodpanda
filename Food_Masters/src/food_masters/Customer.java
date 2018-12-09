@@ -32,9 +32,9 @@ public class Customer extends User{
        password=p;
        mobile_no=m;
     }
-    public boolean updatedatabase()
+    @Override
+    public void updatedatabase()
     {
          
-      return true;
     }
 }

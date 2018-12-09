@@ -214,7 +214,7 @@ Connection con= null;
                         }
           try{            
          ps = con.createStatement();
-         ps.executeUpdate("Insert into saqib.users(name,email,password,mobile,role_id,validation) values ("+quotate(c.name)+","+quotate(c.email)+","+quotate(c.password)+","+quotate(c.mobile_no)+","+c.rol_id+","+0+")");
+         ps.executeUpdate("Insert into saqib.users(name,email,password,mobile,role_id,validation) values ("+quotate(c.name)+","+quotate(c.email)+","+quotate(c.password)+","+quotate(c.mobile_no)+","+c.rol_id+","+1+")");
          JOptionPane.showMessageDialog(rootPane, "inserted", "done ", HEIGHT);      
             } 
           catch (SQLException ex) 
