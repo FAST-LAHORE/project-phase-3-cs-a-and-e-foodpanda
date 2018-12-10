@@ -74,18 +74,6 @@ Connection con= null;
             }
         });
 
-        jTable1_restaurent.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ));
         jTable1_restaurent.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -186,12 +174,14 @@ Connection con= null;
          {
             Logger.getLogger(sign_up.class.getName()).log(Level.SEVERE, null, ex);
          }   
+        
+        show_data();
     }//GEN-LAST:event_jButton1ActionPerformed
      
     public void show_data()
     {   
         DefaultTableModel model=(DefaultTableModel)jTable1_restaurent.getModel();
-        Object[] row=new Object[4];
+        Object[] row=new Object[3];
         for(int i=0;i<list1.size();i++)
         {
             row[0]=list1.get(i).name;

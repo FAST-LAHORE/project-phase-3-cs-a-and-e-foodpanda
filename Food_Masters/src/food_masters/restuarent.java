@@ -59,4 +59,12 @@ public class restuarent extends User{
     {
        
     }
+    public String get_name()
+    {
+      return name;
+    }
+    public String get_address()
+    {
+      return address;
+    }
 }
