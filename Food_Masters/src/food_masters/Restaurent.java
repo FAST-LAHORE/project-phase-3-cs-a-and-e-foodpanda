@@ -55,18 +55,20 @@ Connection con1= null;
         jTextField3 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jPasswordField2 = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel6.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
-        jLabel6.setText("Restaurent Account");
+        jLabel6.setText("Restaurant Account");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 255), new java.awt.Color(153, 153, 255), null, new java.awt.Color(0, 0, 51)));
 
         jLabel4.setText("Password:");
 
-        jLabel3.setText("Restaurent Name");
+        jLabel3.setText("Restauant Name");
 
         jButton3.setBackground(new java.awt.Color(51, 255, 0));
         jButton3.setText("Create Account");
@@ -82,18 +84,27 @@ Connection con1= null;
 
         jLabel5.setText("Mobile Number:");
 
+        jLabel7.setText("Address:");
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3)
@@ -101,7 +112,8 @@ Connection con1= null;
                     .addComponent(jTextField1)
                     .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                     .addComponent(jPasswordField1)
-                    .addComponent(jPasswordField2))
+                    .addComponent(jPasswordField2)
+                    .addComponent(jTextField4))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -129,9 +141,13 @@ Connection con1= null;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,7 +171,7 @@ Connection con1= null;
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
+                .addGap(55, 55, 55))
         );
 
         pack();
@@ -166,6 +182,7 @@ Connection con1= null;
         String st1=jTextField1.getText();
         String st2=jTextField2.getText();
         String st3=jTextField3.getText();
+        String st4=jTextField4.getText();
         String pw1 = new String(jPasswordField1.getPassword());
         String pw2 = new String(jPasswordField2.getPassword());
         restuarent r=new restuarent();
@@ -181,19 +198,23 @@ Connection con1= null;
         {
             JOptionPane.showMessageDialog(rootPane, "enter a phone number", "Invalid phone number", HEIGHT);
         }
+         if(st4.isEmpty())
+        {
+            JOptionPane.showMessageDialog(rootPane, "Address cannot be empty", "Invalid Address", HEIGHT);
+        }
         if(pw1.isEmpty())
         {
-            JOptionPane.showMessageDialog(rootPane, "Password cannot be empty", "Invalid name", HEIGHT);
+            JOptionPane.showMessageDialog(rootPane, "Password cannot be empty", "Invalid Password", HEIGHT);
         }
         if(pw2.isEmpty())
         {
-            JOptionPane.showMessageDialog(rootPane, "confirm password cannot be empty", "Invalid name", HEIGHT);
+            JOptionPane.showMessageDialog(rootPane, "confirm password cannot be empty", "Invalid password", HEIGHT);
         }
         if(pw1!=null && pw2.equals(pw1)==false)
         {
             JOptionPane.showMessageDialog(rootPane, "Passwords must be same", "Passwords do not match", HEIGHT);
         }
-        if(st1.isEmpty()==false && st2.isEmpty()==false && st3.isEmpty()==false && pw1.isEmpty()==false && pw2.isEmpty()==false && pw2.equals(pw1)==true)
+        if(st1.isEmpty()==false && st2.isEmpty()==false && st4.isEmpty()==false && st3.isEmpty()==false && pw1.isEmpty()==false && pw2.isEmpty()==false && pw2.equals(pw1)==true)
         {
             test te1=new test();
             boolean flag =te1.isValid(st2);
@@ -201,7 +222,7 @@ Connection con1= null;
             if(flag==true&&flag1==true)
             {
                 JOptionPane.showMessageDialog(rootPane, "ok", "bye", HEIGHT);
-                r.set_restuarent(st1,st2, st3, pw1);
+                r.set_restuarent(st1,st2, st3, pw1,st4);
                 try{
                            con1=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
                         } 
@@ -210,15 +231,15 @@ Connection con1= null;
                         }
                 try{
                     ps1 = con1.createStatement();
-                    ps1.executeUpdate("Insert into saqib.restaurent(restaurent_name,email,password,mobile,validation) values ("+quotate(r.name)+","+quotate(r.email)+","+quotate(r.password)+","+quotate(r.mobile_no)+","+r.validation+")");
+                    ps1.executeUpdate("Insert into saqib.restaurent(restaurent_name,email,password,mobile,validation,address) values ("+quotate(r.name)+","+quotate(r.email)+","+quotate(r.password)+","+quotate(r.mobile_no)+","+r.validation+","+quotate(r.address)+")");
                     JOptionPane.showMessageDialog(rootPane, "inserted", "done ", HEIGHT);
                 }
                 catch (SQLException ex)
                 {
                     Logger.getLogger(sign_up.class.getName()).log(Level.SEVERE, null, ex);
-    }//GEN-LAST:event_jButton3ActionPerformed
-            }
-            else
+                     }
+            
+            }else
             {
                  if (flag==false)
                {
@@ -230,7 +251,15 @@ Connection con1= null;
                }
             }
         }
-    }
+    
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jTextField4ActionPerformed
+           
     /**
      * @param args the command line arguments
      */
@@ -280,11 +309,13 @@ Connection con1= null;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
