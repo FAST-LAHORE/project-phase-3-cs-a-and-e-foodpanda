@@ -463,7 +463,7 @@ Connection con= null;
             {
                 DefaultTableModel model1=(DefaultTableModel)jTable2.getModel();
                 Object []row=new Object[2];
-               m.set_menu(rs1.getString("Item_name"),rs1.getInt("price"),rs1.getString("Restaurent_name"));
+               m.set_menu(rs1.getString("Item_name"),rs1.getInt("Item_price"),rs1.getString("Restaurent_name"));
                String compareTo = m.get_rsname();
                
                if(n1.equals(compareTo ))
