@@ -29,6 +29,7 @@ Connection con= null;
      ArrayList<restuarent> list1=new ArrayList<restuarent>();
       Statement ps1=null;
     ResultSet rs1=null;
+    restaurent_menu m=new restaurent_menu();
     /**
      * Creates new form place_order
      */
@@ -67,6 +68,9 @@ Connection con= null;
         jButton11 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jTextField2 = new javax.swing.JTextField();
+        jSpinner1 = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -243,6 +247,11 @@ Connection con= null;
         jLabel6.setText("Menu");
 
         jButton9.setText("Place Order");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jButton10.setText("Back");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -271,6 +280,8 @@ Connection con= null;
         ));
         jScrollPane3.setViewportView(jTable2);
 
+        jLabel7.setText("EnterItems' Id");
+
         javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
         jDialog3.getContentPane().setLayout(jDialog3Layout);
         jDialog3Layout.setHorizontalGroup(
@@ -281,18 +292,26 @@ Connection con= null;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton11)
                 .addGap(17, 17, 17))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jButton9)
+                .addGap(35, 35, 35))
             .addGroup(jDialog3Layout.createSequentialGroup()
                 .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDialog3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDialog3Layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jButton9))
-                    .addGroup(jDialog3Layout.createSequentialGroup()
                         .addGap(193, 193, 193)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialog3Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel7)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialog3Layout.setVerticalGroup(
             jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,9 +320,14 @@ Connection con= null;
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton9)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton10)
                     .addComponent(jButton11))
@@ -447,7 +471,7 @@ Connection con= null;
         if(n1.isEmpty()==false)
         {
            String st1=jTextField1.getText();
-          restaurent_menu m=new restaurent_menu();
+          
         try{
                            con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
                         } 
@@ -462,14 +486,15 @@ Connection con= null;
           while(rs1.next())
             {
                 DefaultTableModel model1=(DefaultTableModel)jTable2.getModel();
-                Object []row=new Object[2];
-               m.set_menu(rs1.getString("Item_name"),rs1.getInt("Item_price"),rs1.getString("Restaurent_name"));
+                Object []row=new Object[3];
+               m.set_menu(rs1.getInt("Item_id"),rs1.getString("Item_name"),rs1.getInt("Item_price"),rs1.getString("Restaurent_name"));
                String compareTo = m.get_rsname();
                
                if(n1.equals(compareTo ))
                {
-                 row[0]=m.getitemname();
-                 row[1]=m.getprice();
+                 row[0]=m.get_id();
+                 row[1]=m.getitemname();
+                 row[2]=m.getprice();
                  model1.addRow(row);
                }
             }  
@@ -523,7 +548,51 @@ Connection con= null;
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+       String h=jTextField2.getText();
+       Integer q=jSpinner1.getHeight();
+        if(h.isEmpty())
+        {
+            JOptionPane.showMessageDialog(rootPane, "Select one restaurant", "No restaurant selected", HEIGHT);
+        }
+        
+        if(h.isEmpty()==false)
+        {
+          String st1=jTextField1.getText();
+          order o=new order();
+        try{
+                           con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
+                        } 
+                      catch (SQLException ex) {
+                            JOptionPane.showMessageDialog(rootPane, "DB connection failed", "Connection failed ", HEIGHT);
+                        }
+        try
+        {            
+         ps1 = con.createStatement();
+         String name,rs;
+         Integer price=o.calu(250);
+         name=m.getitemname();
+         rs=m.get_rsname();
+         String g="mehboobdestgir@gmail.com";
+         ps1.executeQuery("insert into saqib.order(ID,Item_name,Quantity,Customer,validation,price) "
+                 + "values ("+h+","+quotate(name)+","+q+","+quotate(g)+","+0+","+price+")");
+          JOptionPane.showMessageDialog(rootPane, "total bill =Rs"+price, "order placed  ", HEIGHT);
+        }   
+          catch (SQLException ex) 
+         {
+            Logger.getLogger(sign_up.class.getName()).log(Level.SEVERE, null, ex);
+         }  
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+      public String quotate(String content){
+    
+        return "'"+content+"'";
+    }
+    
     /**
+     * 
+     * 
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -581,11 +650,14 @@ Connection con= null;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField r_id;
     // End of variables declaration//GEN-END:variables
 }

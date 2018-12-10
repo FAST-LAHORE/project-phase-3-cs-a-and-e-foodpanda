@@ -11,22 +11,25 @@ package food_masters;
  */
 public class restaurent_menu {
     private String Item_name;
+    private Integer id;
     private Integer price;
     private String rs_name; 
    restuarent r;
+   order o;
    restaurent_menu()
    {
    
    }
-   restaurent_menu(String n,Integer p,String rsn)
+   restaurent_menu(Integer i,String n,Integer p,String rsn)
    {
-      set_menu(n,p,rsn);
+      set_menu(i,n,p,rsn);
    }
-   public void set_menu(String n,Integer p,String rsn)
+   public void set_menu(Integer i,String n,Integer p,String rsn)
    {
       Item_name=n;
        price=p;
        rs_name=rsn;
+       id=i;
    }
    public String get_rsname()
    {
@@ -39,5 +42,9 @@ public class restaurent_menu {
     public Integer getprice()
    {
       return price;
+   }
+     public Integer get_id()
+   {
+      return id;
    }
 }

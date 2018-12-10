@@ -12,3 +12,5 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\mehbo\Documents\GitHub\project-phase-3-cs-a-and-e-foodpanda\db
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Dec 11 01:41:58 PKT 2018: Shutting down Derby engine
