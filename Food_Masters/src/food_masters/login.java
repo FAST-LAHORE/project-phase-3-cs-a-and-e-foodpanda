@@ -218,43 +218,43 @@ Connection con= null;
           if(n.isEmpty()==false && k.isEmpty()==false )
           {
               
-//                        String query="Select role_name from saqib.roles where role_id=select role_id from saqib.users where name='"+n+"' and password2='"+k+"'";
-//                         try {
-//                            con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
-//                        } catch (SQLException ex) {
-//                            JOptionPane.showMessageDialog(rootPane, "failed", "bye", HEIGHT);
-//                        }
-//                         
-//                  try
-//                  {
-//                    
-////                      ps=con.Statement(query);
-////                      ps.setString(1, jTextField1.getText());
-////                      ps.setString(2,k);
-//                      ps=con.createStatement();
-//                      
-//                      rs=ps.executeQuery(query);
-//                      while(rs.next())
+                        String query="Select role_name from saqib.roles where role_id=select role_id from saqib.users where name='"+n+"' and password2='"+k+"'";
+                         try {
+                            con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
+                        } catch (SQLException ex) {
+                            JOptionPane.showMessageDialog(rootPane, "failed", "bye", HEIGHT);
+                        }
+                         
+                  try
+                  {
+                    
+//                      ps=con.Statement(query);
+//                      ps.setString(1, jTextField1.getText());
+//                      ps.setString(2,k);
+                      ps=con.createStatement();
+                      
+                      rs=ps.executeQuery(query);
+                      while(rs.next())
+                      {
+                      int t=rs.getInt("role_id");
+                      System.out.println("\trole: " + t); 
+                      JOptionPane.showMessageDialog(rootPane, "congoz", t+"", HEIGHT);
+                      }
+// System.out.println(t);        
+                      
+//                      if(rs.next())
 //                      {
-//                      int t=rs.getInt("role_id");
-//                      System.out.println("\trole: " + t); 
-//                      JOptionPane.showMessageDialog(rootPane, "congoz", t+"", HEIGHT);
+//                      JOptionPane.showMessageDialog(rootPane, "congoz", "Login Successful", HEIGHT);
+//                      }     
+//                      else{
+//                          JOptionPane.showMessageDialog(rootPane, "Invalid Username or password", "Login failed", HEIGHT);
 //                      }
-//// System.out.println(t);        
-//                      
-////                      if(rs.next())
-////                      {
-////                      JOptionPane.showMessageDialog(rootPane, "congoz", "Login Successful", HEIGHT);
-////                      }     
-////                      else{
-////                          JOptionPane.showMessageDialog(rootPane, "Invalid Username or password", "Login failed", HEIGHT);
-////                      }
-//                  }
-//                  catch(SQLException e)
-//                  {
-//                              //JOptionPane.showMessageDialog(rootPane, "failed", "bye", HEIGHT);
-//                      e.printStackTrace();
-//                  }
+                  }
+                  catch(SQLException e)
+                  {
+                              //JOptionPane.showMessageDialog(rootPane, "failed", "bye", HEIGHT);
+                      e.printStackTrace();
+                  }
           }
         
     }//GEN-LAST:event_jButton2ActionPerformed
