@@ -27,21 +27,60 @@ public class admin_dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 616, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(720, 480));
+        setMinimumSize(new java.awt.Dimension(720, 480));
+        setPreferredSize(new java.awt.Dimension(720, 480));
+        setResizable(false);
+        setSize(new java.awt.Dimension(720, 480));
+        getContentPane().setLayout(null);
+
+        jLabel5.setFont(new java.awt.Font("Algerian", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 153, 255));
+        jLabel5.setText("Super Admin Dashboard Panel");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(310, 60, 410, 130);
+
+        jButton1.setText("Staff Management");
+        getContentPane().add(jButton1);
+        jButton1.setBounds(450, 170, 190, 30);
+
+        jButton2.setText("Restaurant Management");
+        getContentPane().add(jButton2);
+        jButton2.setBounds(450, 230, 190, 30);
+
+        jButton3.setText("User Management");
+        getContentPane().add(jButton3);
+        jButton3.setBounds(450, 290, 190, 30);
+
+        jButton4.setText("Give Discounts/Promotions");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(450, 350, 190, 30);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/food_masters/i8.jpg"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 720, 480);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new discounts().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +118,11 @@ public class admin_dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
