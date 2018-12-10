@@ -27,6 +27,8 @@ Connection con= null;
   Statement ps=null;
     ResultSet rs=null;
      ArrayList<restuarent> list1=new ArrayList<restuarent>();
+      Statement ps1=null;
+    ResultSet rs1=null;
     /**
      * Creates new form place_order
      */
@@ -60,11 +62,11 @@ Connection con= null;
         jTable1 = new javax.swing.JTable();
         jDialog3 = new javax.swing.JDialog();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -140,9 +142,15 @@ Connection con= null;
 
         jLabel4.setText("Restaurants Found ");
 
+        r_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                r_idActionPerformed(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel5.setText("Enter Id for selected Restaurant");
+        jLabel5.setText("Enter Name for selected Restaurant");
 
         jButton6.setText("Display Menu");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -234,13 +242,6 @@ Connection con= null;
 
         jLabel6.setText("Menu");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
-
         jButton9.setText("Place Order");
 
         jButton10.setText("Back");
@@ -257,39 +258,52 @@ Connection con= null;
             }
         });
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable2);
+
         javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
         jDialog3.getContentPane().setLayout(jDialog3Layout);
         jDialog3Layout.setHorizontalGroup(
             jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog3Layout.createSequentialGroup()
-                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog3Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDialog3Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDialog3Layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jButton9)))
-                .addContainerGap(174, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton11)
                 .addGap(17, 17, 17))
+            .addGroup(jDialog3Layout.createSequentialGroup()
+                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog3Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialog3Layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(jButton9))
+                    .addGroup(jDialog3Layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jDialog3Layout.setVerticalGroup(
             jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton10)
                     .addComponent(jButton11))
@@ -304,6 +318,11 @@ Connection con= null;
         jLabel1.setText("Logged in as : ");
 
         jTextField1.setFocusable(false);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Place New Order");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -417,23 +436,51 @@ Connection con= null;
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        String n=addr.getText();
+        String n1=r_id.getText();
   
 
-        if(n.isEmpty())
+        if(n1.isEmpty())
         {
             JOptionPane.showMessageDialog(rootPane, "Select one restaurant", "No restaurant selected", HEIGHT);
         }
         
-        if(n.isEmpty()==false)
+        if(n1.isEmpty()==false)
         {
-            // yahan sara kaam krna tune
-            
-            
-            
-            
-            jDialog2.setVisible(false);
-            jDialog3.setVisible(true);
+           String st1=jTextField1.getText();
+          restaurent_menu m=new restaurent_menu();
+        try{
+                           con=DriverManager.getConnection("jdbc:derby://localhost:1527/foodmasters", "saqib", "saqib");
+                        } 
+                      catch (SQLException ex) {
+                            JOptionPane.showMessageDialog(rootPane, "DB connection failed", "Connection failed ", HEIGHT);
+                        }
+        try
+        {            
+         ps1 = con.createStatement();
+         String name;
+         rs1=ps1.executeQuery("select* from saqib.menu");
+          while(rs1.next())
+            {
+                DefaultTableModel model1=(DefaultTableModel)jTable2.getModel();
+                Object []row=new Object[2];
+               m.set_menu(rs1.getString("Item_name"),rs1.getInt("price"),rs1.getString("Restaurent_name"));
+               String compareTo = m.get_rsname();
+               
+               if(n1.equals(compareTo ))
+               {
+                 row[0]=m.getitemname();
+                 row[1]=m.getprice();
+                 model1.addRow(row);
+               }
+            }  
+          } 
+          catch (SQLException ex) 
+         {
+            Logger.getLogger(sign_up.class.getName()).log(Level.SEVERE, null, ex);
+         }
+               
+         jDialog2.setVisible(false);
+         jDialog3.setVisible(true);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -467,6 +514,14 @@ Connection con= null;
          jDialog2.setVisible(false);
  
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void r_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_r_idActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -526,10 +581,10 @@ Connection con= null;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField r_id;
     // End of variables declaration//GEN-END:variables

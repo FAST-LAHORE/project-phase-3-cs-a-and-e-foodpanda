@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
  * @author mehbo
  */
 public class restuarent extends User{
+    restaurent_menu rm;
     protected Integer validation;
     protected String address;
     Connection con= null;
